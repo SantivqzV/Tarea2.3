@@ -120,6 +120,50 @@ class Linea{
             return message;
         }
 
+        // Sobrecarga para el operador ==
+        bool operator==(const Linea& linea) const {
+            return this->year == linea.year &&
+                this->monthDigit == linea.monthDigit &&
+                this->day == linea.day &&
+                this->hour == linea.hour &&
+                this->minute == linea.minute &&
+                this->second == linea.second;
+        }
+
+        // Sobrecarga para el operador >=
+        bool operator>=(const Linea& linea) const {
+            if (this->year > linea.year) {
+                return true;
+            }
+            else if (this->year == linea.year) {
+                if (this->monthDigit > linea.monthDigit) {
+                    return true;
+                }
+                else if (this->monthDigit == linea.monthDigit) {
+                    if (this->day > linea.day) {
+                        return true;
+                    }
+                    else if (this->day == linea.day) {
+                        if (this->hour > linea.hour) {
+                            return true;
+                        }
+                        else if (this->hour == linea.hour) {
+                            if (this->minute > linea.minute) {
+                                return true;
+                            }
+                            else if (this->minute == linea.minute) {
+                                if (this->second >= linea.second) {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+
         //Sobrecarga para operador <=
         bool operator<=(const Linea& linea){
             if(this->year < linea.year){
@@ -232,20 +276,23 @@ class List{
             file.close();
         }
 
-        void imprimirRango(Linea fechaInicio, Linea fechaFinal){
+        void imprimirRango(Linea fechaInicio, Linea fechaFinal) {
             Node<T>* current = head;
-            while(current != nullptr){
-                //Imprimir Fecha
-                cout << current->linea.getYear() << " " << current->linea.getMonth() << " " << setw(2) << setfill('0') << current->linea.getDay() << " ";
+            while (current != nullptr) {
+                if (current->linea >= fechaInicio && current->linea <= fechaFinal) {
+                    //Imprimir Fecha
+                    cout << current->linea.getYear() << " " << current->linea.getMonth() << " " << setw(2) << setfill('0') << current->linea.getDay() << " ";
 
-                //Imprimir Hora
-                cout << setw(2) << setfill('0') << current->linea.getHour() << ":"<< setw(2) << setfill('0')  << current->linea.getMinute() << ":" ;
+                    //Imprimir Hora
+                    cout << setw(2) << setfill('0') << current->linea.getHour() << ":" << setw(2) << setfill('0') << current->linea.getMinute() << ":";
 
-                //Imprimir IP y mensaje
-                cout << setw(2) << setfill('0')  << current->linea.getSecond() << " | IP: " << current->linea.getIp() << " | INFO: " << current->linea.getMessage() << endl;
+                    //Imprimir IP y mensaje
+                    cout << setw(2) << setfill('0') << current->linea.getSecond() << " | IP: " << current->linea.getIp() << " | INFO: " << current->linea.getMessage() << endl;
+                }
                 current = current->next;
             }
         }
+
 
         Node<T> *split(Node<T> *head){
             Node<T> *slow = head;
@@ -317,62 +364,62 @@ class List{
 int main(){
     List<Linea>* lista = new List<Linea>();
 
-    int year;
-    string month;
-    int day;
-    int hour;
-    int minute;
-    int second;
+    int year = 2020;
+    string month = "Jan";
+    int day = 20;
+    int hour = 15;
+    int minute = 50;
+    int second = 25;
 
-    cout << "Ingresa la fecha de inicio de rango" << endl;
+    // cout << "Ingresa la fecha de inicio de rango" << endl;
    
-    cout << "Ingrese el año" << endl;
-    cin >> year;
+    // cout << "Ingrese el año" << endl;
+    // cin >> year;
     
-    cout << "Ingrese el mes" << endl;
-    cin >> month;
+    // cout << "Ingrese el mes" << endl;
+    // cin >> month;
 
-    cout << "Ingrese el día" << endl;
-    cin >> day;
+    // cout << "Ingrese el día" << endl;
+    // cin >> day;
 
-    cout << "Ingrese la hora" << endl;
-    cin >> hour;
+    // cout << "Ingrese la hora" << endl;
+    // cin >> hour;
 
-    cout << "Ingrese el minuto" << endl;
-    cin  >> minute;
+    // cout << "Ingrese el minuto" << endl;
+    // cin  >> minute;
 
-    cout << "Ingrese el segundo" << endl;
-    cin >> second;
+    // cout << "Ingrese el segundo" << endl;
+    // cin >> second;
 
     //Objeto de inicio
     Linea fechaInicio(year, month, day, hour, minute, second, "", "");
 
-    int yearFin;
-    string monthFin;
-    int dayFin;
-    int hourFin;
-    int minuteFin;
-    int secondFin;
+    int yearFin = 2020;
+    string monthFin = "Jan";
+    int dayFin = 20;
+    int hourFin = 15;
+    int minuteFin = 50;
+    int secondFin = 28;
 
-    cout << "Ingresa la fecha final del rango" << endl;
+    // cout << "Ingresa la fecha final del rango" << endl;
    
-    cout << "Ingrese el año" << endl;
-    cin >> yearFin;
+    // cout << "Ingrese el año" << endl;
+    // cin >> yearFin;
     
-    cout << "Ingrese el mes" << endl;
-    cin >> monthFin;
+    // cout << "Ingrese el mes" << endl;
+    // cin >> monthFin;
 
-    cout << "Ingrese el día" << endl;
-    cin >> dayFin;
+    // cout << "Ingrese el día" << endl;
+    // cin >> dayFin;
 
-    cout << "Ingrese la hora" << endl;
-    cin >> hourFin;
+    // cout << "Ingrese la hora" << endl;
+    // cin >> hourFin;
 
-    cout << "Ingrese el minuto" << endl;
-    cin  >> minuteFin;
+    // cout << "Ingrese el minuto" << endl;
+    // cin  >> minuteFin;
 
-    cout << "Ingrese el segundo" << endl;
-    cin >> secondFin;
+    // cout << "Ingrese el segundo" << endl;
+    // cin >> secondFin;
 
     //Objeto de inicio
     Linea fechaFin(yearFin, monthFin, dayFin, hourFin, minuteFin, secondFin, "", "");
