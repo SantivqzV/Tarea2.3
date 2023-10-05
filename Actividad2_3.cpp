@@ -1,6 +1,6 @@
 /**
  * Santiago Vázquez Villarreal - A01177850
- * Adrian Gómez - A008
+ * Adrian Gómez - A00835254
  * Saúl Ortega Figueroa - A01252717
  * 
  * Fecha de creación: 03/10/2023
